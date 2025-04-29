@@ -1,7 +1,6 @@
-
 import React, { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { getShopsByOwner, shops, Shop, Product, getProductsByShop, products } from "@/utils/data";
+import { getShopsByOwner, shops, Shop, Product, getProductsByShop, products, updateProduct } from "@/utils/data";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -19,11 +18,14 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import { cities } from "@/utils/data";
 import { Store, Package, Plus, Edit, Trash } from "lucide-react";
+import EditProductDialog from "@/components/products/EditProductDialog";
 
 const ShopOwnerDashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
+  const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   
   const userShops = user ? getShopsByOwner(user.id) : [];
   
@@ -120,6 +122,25 @@ const ShopOwnerDashboard = () => {
       discount: 0,
       inStock: true,
       category: "",
+    });
+  };
+
+  const handleEditProduct = (product: Product) => {
+    setProductToEdit(product);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleProductUpdated = (updatedProduct: Product) => {
+    // Force a re-render by updating some state
+    const updatedShops = [...userShops];
+    setSelectedShop(null);
+    setTimeout(() => {
+      setSelectedShop(selectedShop);
+    }, 10);
+    
+    toast({
+      title: "Product Updated",
+      description: `${updatedProduct.name} has been updated successfully`,
     });
   };
 
@@ -382,7 +403,11 @@ const ShopOwnerDashboard = () => {
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Button size="icon" variant="ghost">
+                              <Button 
+                                size="icon" 
+                                variant="ghost"
+                                onClick={() => handleEditProduct(product)}
+                              >
                                 <Edit className="h-4 w-4" />
                               </Button>
                               <Button size="icon" variant="ghost">
@@ -403,6 +428,16 @@ const ShopOwnerDashboard = () => {
             );
           })}
         </div>
+      )}
+
+      {/* Edit product dialog */}
+      {productToEdit && (
+        <EditProductDialog
+          product={productToEdit}
+          open={isEditDialogOpen}
+          onOpenChange={setIsEditDialogOpen}
+          onProductUpdated={handleProductUpdated}
+        />
       )}
     </div>
   );

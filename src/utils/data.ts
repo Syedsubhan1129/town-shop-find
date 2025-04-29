@@ -1,4 +1,3 @@
-
 export interface User {
   id: string;
   name: string;
@@ -41,6 +40,77 @@ export const cities: City[] = [
   { id: "3", name: "Bangalore" },
   { id: "4", name: "Chennai" },
   { id: "5", name: "Hyderabad" },
+  { id: "6", name: "Kolkata" },
+  { id: "7", name: "Pune" },
+  { id: "8", name: "Ahmedabad" },
+  { id: "9", name: "Jaipur" },
+  { id: "10", name: "Lucknow" },
+  { id: "11", name: "Kanpur" },
+  { id: "12", name: "Nagpur" },
+  { id: "13", name: "Patna" },
+  { id: "14", name: "Indore" },
+  { id: "15", name: "Thane" },
+  { id: "16", name: "Bhopal" },
+  { id: "17", name: "Visakhapatnam" },
+  { id: "18", name: "Vadodara" },
+  { id: "19", name: "Coimbatore" },
+  { id: "20", name: "Ludhiana" },
+  { id: "21", name: "Kochi" },
+  { id: "22", name: "Agra" },
+  { id: "23", name: "Madurai" },
+  { id: "24", name: "Varanasi" },
+  { id: "25", name: "Meerut" },
+  { id: "26", name: "Nashik" },
+  { id: "27", name: "Rajkot" },
+  { id: "28", name: "Surat" },
+  { id: "29", name: "Amritsar" },
+  { id: "30", name: "Allahabad" },
+  { id: "31", name: "Ranchi" },
+  { id: "32", name: "Howrah" },
+  { id: "33", name: "Jabalpur" },
+  { id: "34", name: "Gwalior" },
+  { id: "35", name: "Vijayawada" },
+  { id: "36", name: "Chandigarh" },
+  { id: "37", name: "Mysore" },
+  { id: "38", name: "Noida" },
+  { id: "39", name: "Ghaziabad" },
+  { id: "40", name: "Faridabad" },
+  { id: "41", name: "Srinagar" },
+  { id: "42", name: "Aurangabad" },
+  { id: "43", name: "Dhanbad" },
+  { id: "44", name: "Jodhpur" },
+  { id: "45", name: "Tiruchirappalli" },
+  { id: "46", name: "Salem" },
+  { id: "47", name: "Guwahati" },
+  { id: "48", name: "Shimla" },
+  { id: "49", name: "Dehradun" },
+  { id: "50", name: "Puducherry" },
+  // Small towns and villages
+  { id: "51", name: "Almora" },
+  { id: "52", name: "Pushkar" },
+  { id: "53", name: "Hampi" },
+  { id: "54", name: "Darjeeling" },
+  { id: "55", name: "Munnar" },
+  { id: "56", name: "Jaisalmer" },
+  { id: "57", name: "Orchha" },
+  { id: "58", name: "Varkala" },
+  { id: "59", name: "Khajuraho" },
+  { id: "60", name: "Bir" },
+  { id: "61", name: "Kasol" },
+  { id: "62", name: "Dharamshala" },
+  { id: "63", name: "McLeod Ganj" },
+  { id: "64", name: "Tawang" },
+  { id: "65", name: "Ziro" },
+  { id: "66", name: "Majuli" },
+  { id: "67", name: "Cherrapunji" },
+  { id: "68", name: "Tirthan Valley" },
+  { id: "69", name: "Spiti Valley" },
+  { id: "70", name: "Kalpa" },
+  { id: "71", name: "Kasar Devi" },
+  { id: "72", name: "Munsiyari" },
+  { id: "73", name: "Binsar" },
+  { id: "74", name: "Nainital" },
+  { id: "75", name: "Ranikhet" },
 ];
 
 export const users: User[] = [
@@ -221,4 +291,13 @@ export const getProductById = (productId: string) => {
 
 export const getShopsByOwner = (ownerId: string) => {
   return shops.filter(shop => shop.ownerId === ownerId);
+};
+
+export const updateProduct = (productId: string, updatedProduct: Partial<Product>) => {
+  const index = products.findIndex(product => product.id === productId);
+  if (index !== -1) {
+    products[index] = { ...products[index], ...updatedProduct };
+    return products[index];
+  }
+  return null;
 };

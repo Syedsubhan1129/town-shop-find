@@ -223,7 +223,8 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                 className={`w-full ${registerRole === "customer" ? "bg-brand-blue hover:bg-blue-600" : "bg-brand-orange hover:bg-brand-darkorange"} transition-colors`}
                 disabled={registerLoading}
               >
-                {registerLoading ? "Creating Account..." : registerRole === "shop_owner" ? "Register your shop" : "Register as customer"}
+                {registerLoading ? "Creating Account..." : registerRole === "shop_owner" ? 
+                  <span className="text-blue-200">Register your shop</span> : "Register as customer"}
               </Button>
             </form>
             
