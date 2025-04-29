@@ -93,13 +93,13 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md animate-fade-in">
       <Tabs defaultValue={defaultTab} value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">Login</TabsTrigger>
-          <TabsTrigger value="register">Register</TabsTrigger>
+          <TabsTrigger value="login" className="text-base">Login</TabsTrigger>
+          <TabsTrigger value="register" className="text-base">Register</TabsTrigger>
         </TabsList>
         
         <TabsContent value="login">
           <div className="space-y-4 mt-4">
-            <h2 className="text-2xl font-bold text-center">Welcome Back</h2>
+            <h2 className="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
             <p className="text-muted-foreground text-center">
               Sign in to your account to continue
             </p>
@@ -114,6 +114,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
                   required
+                  className="border-gray-300 focus:border-brand-blue focus:ring-brand-blue"
                 />
               </div>
               
@@ -126,10 +127,15 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   required
+                  className="border-gray-300 focus:border-brand-blue focus:ring-brand-blue"
                 />
               </div>
               
-              <Button type="submit" className="w-full" disabled={loginLoading}>
+              <Button 
+                type="submit" 
+                className="w-full bg-brand-blue hover:bg-blue-600 transition-colors" 
+                disabled={loginLoading}
+              >
                 {loginLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
@@ -139,7 +145,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                 Don't have an account?{" "}
                 <button
                   onClick={() => setActiveTab("register")}
-                  className="text-brand-blue font-semibold hover:underline"
+                  className="text-brand-blue font-semibold hover:text-blue-600 hover:underline transition-colors"
                 >
                   Register
                 </button>
@@ -150,7 +156,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
         
         <TabsContent value="register">
           <div className="space-y-4 mt-4">
-            <h2 className="text-2xl font-bold text-center">Create an Account</h2>
+            <h2 className="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
             <p className="text-muted-foreground text-center">
               Join TownShop to start shopping or selling
             </p>
@@ -164,6 +170,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                   value={registerName}
                   onChange={(e) => setRegisterName(e.target.value)}
                   required
+                  className="border-gray-300 focus:border-brand-blue focus:ring-brand-blue"
                 />
               </div>
               
@@ -176,6 +183,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                   value={registerEmail}
                   onChange={(e) => setRegisterEmail(e.target.value)}
                   required
+                  className="border-gray-300 focus:border-brand-blue focus:ring-brand-blue"
                 />
               </div>
               
@@ -188,6 +196,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                   value={registerPassword}
                   onChange={(e) => setRegisterPassword(e.target.value)}
                   required
+                  className="border-gray-300 focus:border-brand-blue focus:ring-brand-blue"
                 />
               </div>
               
@@ -196,21 +205,25 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                 <RadioGroup
                   value={registerRole}
                   onValueChange={(value) => setRegisterRole(value as "customer" | "shop_owner")}
-                  className="flex flex-col space-y-2"
+                  className="flex flex-col space-y-3"
                 >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="customer" id="customer" />
-                    <Label htmlFor="customer">Shop as a Customer</Label>
+                  <div className="flex items-center space-x-3 bg-blue-50 p-3 rounded-md hover:bg-blue-100 transition-colors cursor-pointer">
+                    <RadioGroupItem value="customer" id="customer" className="text-brand-blue" />
+                    <Label htmlFor="customer" className="cursor-pointer font-medium">Shop as a Customer</Label>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="shop_owner" id="shop-owner" />
-                    <Label htmlFor="shop-owner">Sell as a Shop Owner</Label>
+                  <div className="flex items-center space-x-3 bg-orange-50 p-3 rounded-md hover:bg-orange-100 transition-colors cursor-pointer">
+                    <RadioGroupItem value="shop_owner" id="shop-owner" className="text-brand-orange" />
+                    <Label htmlFor="shop-owner" className="cursor-pointer font-medium">Sell as a Shop Owner</Label>
                   </div>
                 </RadioGroup>
               </div>
               
-              <Button type="submit" className="w-full" disabled={registerLoading}>
-                {registerLoading ? "Creating Account..." : "Register"}
+              <Button 
+                type="submit" 
+                className={`w-full ${registerRole === "customer" ? "bg-brand-blue hover:bg-blue-600" : "bg-brand-orange hover:bg-brand-darkorange"} transition-colors`}
+                disabled={registerLoading}
+              >
+                {registerLoading ? "Creating Account..." : registerRole === "shop_owner" ? "Register your shop" : "Register as customer"}
               </Button>
             </form>
             
@@ -219,7 +232,7 @@ const AuthModal: React.FC<{ defaultTab?: string }> = ({
                 Already have an account?{" "}
                 <button
                   onClick={() => setActiveTab("login")}
-                  className="text-brand-blue font-semibold hover:underline"
+                  className="text-brand-blue font-semibold hover:text-blue-600 hover:underline transition-colors"
                 >
                   Login
                 </button>

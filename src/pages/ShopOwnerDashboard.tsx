@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { getShopsByOwner, shops, Shop, Product, getProductsByShop } from "@/utils/data";
+import { getShopsByOwner, shops, Shop, Product, getProductsByShop, products } from "@/utils/data";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
