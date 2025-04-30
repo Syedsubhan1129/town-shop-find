@@ -1,26 +1,119 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>town-shop-find</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="town-shop-find" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>TownShop Find</title>
+    <meta name="description" content="Find local shops in your town" />
+    <link rel="stylesheet" href="styles.css">
   </head>
-
   <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <header>
+      <nav>
+        <div class="logo">TownShop Find</div>
+        <div class="nav-links">
+          <a href="#" class="active">Home</a>
+          <a href="#" id="shops-link">Shops</a>
+          <a href="#" id="products-link">Products</a>
+          <div id="user-menu">
+            <button id="login-btn" class="btn">Login</button>
+            <button id="register-btn" class="btn btn-primary">Register</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Discover Local Shops in Your Town</h1>
+        <p>Support local businesses and find unique products near you</p>
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Search for shops or products...">
+          <select id="city-filter">
+            <option value="">All Cities</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bangalore">Bangalore</option>
+          </select>
+          <button id="search-btn" class="btn btn-primary">Search</button>
+        </div>
+      </section>
+
+      <section class="featured-shops">
+        <h2>Featured Shops</h2>
+        <div id="shops-container" class="card-container"></div>
+      </section>
+
+      <section class="featured-products">
+        <h2>Popular Products</h2>
+        <div id="products-container" class="card-container"></div>
+      </section>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="tabs">
+          <button class="tab-btn active" id="login-tab">Login</button>
+          <button class="tab-btn" id="register-tab">Register</button>
+        </div>
+        
+        <form id="login-form" class="auth-form">
+          <h2>Login</h2>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <p id="login-error" class="error-message"></p>
+        </form>
+        
+        <form id="register-form" class="auth-form" style="display: none;">
+          <h2>Register</h2>
+          <div class="form-group">
+            <label for="register-name">Name</label>
+            <input type="text" id="register-name" required>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" required>
+          </div>
+          <div class="form-group">
+            <label for="register-city">City</label>
+            <select id="register-city" required>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Bangalore">Bangalore</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="register-role">Role</label>
+            <select id="register-role" required>
+              <option value="customer">Customer</option>
+              <option value="shop_owner">Shop Owner</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+          <p id="register-error" class="error-message"></p>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 TownShop Find. All rights reserved.</p>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
