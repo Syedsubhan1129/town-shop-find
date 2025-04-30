@@ -1,0 +1,48 @@
+
+[
+  {
+    "id": "1",
+    "name": "Urban Threads",
+    "description": "Locally made, sustainable clothing and accessories",
+    "ownerId": "2",
+    "logoUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2xvdGhpbmclMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "coverImageUrl": "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2xvdGhpbmclMjBzdG9yZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "address": "123 Main St, Mumbai",
+    "city": "Mumbai",
+    "contactEmail": "contact@urbanthreads.com",
+    "contactPhone": "9876543210",
+    "categories": ["Clothing", "Accessories"],
+    "rating": 4.7,
+    "createdAt": "2025-04-29T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "name": "Earthen Wares",
+    "description": "Handcrafted pottery and ceramics",
+    "ownerId": "3",
+    "logoUrl": "https://images.unsplash.com/photo-1607606116242-357a0bd4404f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG90dGVyeXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "coverImageUrl": "https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cG90dGVyeXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "address": "456 Park Ave, Delhi",
+    "city": "Delhi",
+    "contactEmail": "hello@earthenwares.com",
+    "contactPhone": "9876543211",
+    "categories": ["Home", "Decor", "Gifts"],
+    "rating": 4.9,
+    "createdAt": "2025-04-29T10:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "name": "Harvest Fresh",
+    "description": "Locally sourced organic produce and food products",
+    "ownerId": "4",
+    "logoUrl": "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JvY2VyeXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "coverImageUrl": "https://images.unsplash.com/photo-1608686207856-001b95cf60ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZmFybWVycyUyMG1hcmtldHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "address": "789 Farm Rd, Bangalore",
+    "city": "Bangalore",
+    "contactEmail": "info@harvestfresh.com",
+    "contactPhone": "9876543212",
+    "categories": ["Food", "Grocery", "Organic"],
+    "rating": 4.8,
+    "createdAt": "2025-04-29T10:00:00.000Z"
+  }
+]
