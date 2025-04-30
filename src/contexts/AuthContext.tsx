@@ -14,8 +14,9 @@ type AuthContextType = {
   user: User | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string, role: 'customer' | 'shop_owner') => Promise<boolean>;
+  register: (name: string, email: string, password: string, role: 'customer' | 'shop_owner', city?: string) => Promise<boolean>;
   logout: () => void;
+  updateUserProfile: (userId: string, userData: Partial<User>) => Promise<boolean>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -44,7 +45,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Use the new database service
+      // Use the database service
       const authenticatedUser = userService.authenticate(email, password);
       
       if (authenticatedUser) {
@@ -66,7 +67,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     name: string, 
     email: string, 
     password: string, 
-    role: 'customer' | 'shop_owner'
+    role: 'customer' | 'shop_owner',
+    city?: string
   ): Promise<boolean> => {
     setIsLoading(true);
     try {
@@ -79,12 +81,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return false;
       }
       
-      // Use the new database service
+      // Use the database service
       const newUser = userService.createUser({
         name,
         email,
         password,
-        role
+        role,
+        city
       });
       
       // Create a sanitized version to store in state (without password)
@@ -101,6 +104,33 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
+  // Update user profile function
+  const updateUserProfile = async (userId: string, userData: Partial<User>): Promise<boolean> => {
+    setIsLoading(true);
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Update the user in the database
+      const updatedUser = userService.updateUser(userId, userData);
+      
+      if (updatedUser) {
+        // Create a sanitized version to store in state (without password)
+        const { password: _, ...userWithoutPassword } = updatedUser;
+        
+        setUser(userWithoutPassword as User);
+        localStorage.setItem('townshop_user', JSON.stringify(userWithoutPassword));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Update profile error:', error);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Logout function
   const logout = () => {
     setUser(null);
@@ -108,7 +138,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout, updateUserProfile }}>
       {children}
     </AuthContext.Provider>
   );

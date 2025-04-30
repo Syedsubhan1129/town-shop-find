@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
+import { cities } from "@/utils/data";
 
 interface RegisterFormProps {
   onLoginClick: () => void;
@@ -22,6 +24,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerRole, setRegisterRole] = useState<"customer" | "shop_owner">("customer");
+  const [registerCity, setRegisterCity] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -29,7 +32,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
     setRegisterLoading(true);
     
     try {
-      const success = await register(registerName, registerEmail, registerPassword, registerRole);
+      const success = await register(
+        registerName, 
+        registerEmail, 
+        registerPassword, 
+        registerRole,
+        registerCity || undefined
+      );
+      
       if (success) {
         toast({
           title: "Registration Successful",
@@ -101,6 +111,22 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
         </div>
         
         <div className="space-y-2">
+          <Label htmlFor="city">City</Label>
+          <Select value={registerCity} onValueChange={setRegisterCity}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select your city" />
+            </SelectTrigger>
+            <SelectContent>
+              {cities.map((city) => (
+                <SelectItem key={city.id} value={city.name}>
+                  {city.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="space-y-2">
           <Label>I want to:</Label>
           <RadioGroup
             value={registerRole}
@@ -124,7 +150,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
           disabled={registerLoading}
         >
           {registerLoading ? "Creating Account..." : registerRole === "shop_owner" ? 
-            <span className="text-blue-200">Register your shop</span> : "Register as customer"}
+            "Register your shop" : "Register as customer"}
         </Button>
       </form>
       
