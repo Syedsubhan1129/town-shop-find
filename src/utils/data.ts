@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   role: 'customer' | 'shop_owner';
-  city?: string;
+  city?: string;  // Added the city property as optional
 }
 
 export interface Shop {

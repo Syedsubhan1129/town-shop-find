@@ -7,6 +7,7 @@ type User = {
   name: string;
   email: string;
   role: 'customer' | 'shop_owner';
+  city?: string;  // Added the city property as optional
 };
 
 type AuthContextType = {

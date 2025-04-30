@@ -6,6 +6,7 @@
     "email": "customer@example.com",
     "password": "password123",
     "role": "customer",
+    "city": "Mumbai",
     "createdAt": "2025-04-29T10:00:00.000Z"
   },
   {
@@ -14,6 +15,7 @@
     "email": "shop@example.com",
     "password": "password123",
     "role": "shop_owner",
+    "city": "Delhi",
     "createdAt": "2025-04-29T10:00:00.000Z"
   }
 ]
